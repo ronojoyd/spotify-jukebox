@@ -18,6 +18,9 @@ const spotifyApi = new SpotifyWebApi({
     redirectUri: process.env.SPOTIFY_REDIRECT_URI
 });
 
+// Adding playback controls
+const playbackControls = require('./routes/playbackControls');
+
 app.get('/login', (req, res) => {
     const scopes = [
         'user-read-playback-state',
@@ -93,6 +96,7 @@ app.post('/join-session', async (req, res) => {
     const { sessionId } = req.body;
 
     try {
+
         // Check if session exists
         const session = await Session.findOne({ sessionId });
         
@@ -101,9 +105,12 @@ app.post('/join-session', async (req, res) => {
         }
 
         res.json({ message: 'Session joined successfully', session });
+
     } catch (err) {
+
         console.error('Error joining session:', err);
         res.status(500).send('Error joining session');
+
     }
 });
 
@@ -169,10 +176,11 @@ app.post('/add-to-queue', async (req, res) => {
 
         console.error('Error adding song to queue:', err);
         res.status(500).send('Error adding song to queue');
-        
+
     }
 });
 
+app.use('/playback', playbackControls);
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Spotify Jukebox.');
