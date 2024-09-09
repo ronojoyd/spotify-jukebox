@@ -19,7 +19,7 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 // Adding playback controls
-const playbackControls = require('./routes/playbackControls');
+const playbackRoutes = require('./routes/playbackRoutes');
 
 app.get('/login', (req, res) => {
     const scopes = [
@@ -147,6 +147,21 @@ app.get('/search', async (req, res) => {
     }
 });
 
+// Route for viewing a session's queue
+// router.get('/queue/:sessionId', async (req, res) => {
+//     const { sessionId } = req.params;
+
+//     try {
+//         const session = await Session.findById(sessionId);
+//         if (!session) return res.status(404).send('Session not found');
+
+//         res.json(session.queue);
+//     } catch (error) {
+//         console.error('Error retrieving queue:', error);
+//         res.status(500).send('Error retrieving queue');
+//     }
+// });
+
 // Route for adding a song to the session queue
 app.post('/add-to-queue', async (req, res) => {
     const { sessionId, track } = req.body;
@@ -180,7 +195,7 @@ app.post('/add-to-queue', async (req, res) => {
     }
 });
 
-app.use('/playback', playbackControls);
+app.use('/playback', playbackRoutes);
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Spotify Jukebox.');
