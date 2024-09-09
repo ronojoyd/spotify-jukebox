@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Jukebox</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Spotify Jukebox</h1>
+        
+        <!-- Create a session -->
+        <div class="session-creation">
+            <button id="create-session">Create Session</button>
+            <input type="text" id="session-id" placeholder="Enter Session ID to Join">
+            <button id="join-session">Join Session</button>
+        </div>
+
+        <!-- Search for Songs -->
+        <div class="song-search">
+            <input type="text" id="search-query" placeholder="Search for a song">
+            <button id="search-btn">Search</button>
+        </div>
+
+        <!-- Search Results -->
+        <div id="search-results"></div>
+
+        <!-- Playback Controls -->
+        <div class="playback-controls">
+            <button id="play-btn">Play</button>
+            <button id="pause-btn">Pause</button>
+            <button id="next-btn">Next</button>
+            <button id="prev-btn">Previous</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

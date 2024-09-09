@@ -10,6 +10,8 @@ const Session = require('./models/Session');
 // Connecting to MongoDB
 connectDB();
 
+app.use(express.static('public'));
+
 const SpotifyWebApi = require('spotify-web-api-node');
 
 const spotifyApi = new SpotifyWebApi({
@@ -124,6 +126,8 @@ app.get('/search', async (req, res) => {
 
     try {
 
+        console.log("Searching for a song...");
+
         // Using Spotify API to search for tracks
         const data = await spotifyApi.searchTracks(query);
 
@@ -162,8 +166,11 @@ app.get('/search', async (req, res) => {
 //     }
 // });
 
+app.use(express.json());
+
 // Route for adding a song to the session queue
 app.post('/add-to-queue', async (req, res) => {
+
     const { sessionId, track } = req.body;
 
     if (!sessionId || !track) {
